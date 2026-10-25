@@ -41,6 +41,27 @@ func main() {
 }
 ```
 
+```go
+func setupLog(cfg *config.Config) {
+	if cfg.App.LogDir == "" {
+		cfg.App.LogDir = "_logs/"
+	}
+	var opt []logging.Option
+	if runtime.GOOS == "windows" {
+		opt = append(opt, logging.WithMirror(os.Stdout))
+	}
+	if _, err := logging.InitDefault(cfg.App.LogDir,
+		logging.WithName("PROJECT_DEMO"),
+		logging.WithLevel(logging.LevelInfo),
+		logging.WithMaxAge(7)); err != nil {
+		logging.Errorf("init error, err:%+v", err)
+		return
+	}
+}
+
+
+```
+
 `Init` is `New` followed by `SetDefault`, so all three end up writing to the
 same rotating file:
 
