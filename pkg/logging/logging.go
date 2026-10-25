@@ -253,6 +253,7 @@ func (l *Logger) Warnf(format string, args ...any)  { l.logf(LevelWarn, nil, for
 func (l *Logger) Errorf(format string, args ...any) { l.logf(LevelError, nil, format, args...) }
 func (l *Logger) Fatalf(format string, args ...any) { l.logf(LevelFatal, nil, format, args...) }
 func (l *Logger) Panicf(format string, args ...any) { l.logf(LevelPanic, nil, format, args...) }
+func (l *Logger) Printf(format string, args ...any) { l.logf(LevelInfo, nil, format, args...) }
 
 func (l *Logger) DebugContextf(ctx context.Context, format string, args ...any) {
 	l.logf(LevelDebug, FieldsFrom(ctx), format, args...)
@@ -471,6 +472,7 @@ func Warnf(format string, args ...any)  { L().logf(LevelWarn, nil, format, args.
 func Errorf(format string, args ...any) { L().logf(LevelError, nil, format, args...) }
 func Fatalf(format string, args ...any) { L().logf(LevelFatal, nil, format, args...) }
 func Panicf(format string, args ...any) { L().logf(LevelPanic, nil, format, args...) }
+func Printf(format string, args ...any) { L().logf(LevelInfo, nil, format, args...) }
 
 func DebugContextf(ctx context.Context, format string, args ...any) {
 	L().logf(LevelDebug, FieldsFrom(ctx), format, args...)
@@ -489,4 +491,17 @@ func FatalContextf(ctx context.Context, format string, args ...any) {
 }
 func PanicContextf(ctx context.Context, format string, args ...any) {
 	L().logf(LevelPanic, FieldsFrom(ctx), format, args...)
+}
+
+type StdLogger interface {
+	Printf(fmt string, arg ...any)
+}
+
+type LevelLogger interface {
+	Errorf(fmt string, arg ...any)
+	Infof(fmt string, arg ...any)
+	Debugf(fmt string, arg ...any)
+	Warnf(fmt string, arg ...any)
+	Panicf(fmt string, arg ...any)
+	Fatalf(fmt string, arg ...any)
 }
