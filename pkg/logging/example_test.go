@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/lyr2000/simple-go-logging/pkg/logging"
+	"github.com/lyr-2000/simple-go-logging/pkg/logging"
 )
 
 // levelOnly is used by the examples so that what they print stays reproducible.

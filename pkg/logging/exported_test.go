@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/lyr2000/simple-go-logging/pkg/logging"
+	"github.com/lyr-2000/simple-go-logging/pkg/logging"
 )
 
 // This file deliberately lives in the external test package: asserting that

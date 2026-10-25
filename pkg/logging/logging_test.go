@@ -493,7 +493,7 @@ func Test_setdefault2(t *testing.T) {
 
 func Test_setdefault3(t *testing.T) {
 	d, _ := os.Getwd()
-	l, err := Init(d+"/_logs", WithMirror(os.Stdout))
+	l, err := InitDefault(d+"/_logs", WithMirror(os.Stdout))
 	if err != nil {
 		t.Fatal(err)
 	}

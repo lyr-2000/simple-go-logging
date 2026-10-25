@@ -382,7 +382,7 @@ func callerFromStdLog() string {
 var std atomic.Pointer[Logger]
 
 func init() {
-	std.Store(newStderrLogger())
+	std.Store(NewStdout())
 }
 
 // NewStderr returns a Logger writing to stderr at LevelInfo with the text
@@ -420,12 +420,12 @@ func newStderrLogger() *Logger { return NewStderr() }
 // L returns the current default logger.
 func L() *Logger { return std.Load() }
 
-// Init creates a Logger writing into dir, installs it as the default and
+// InitDefault creates a Logger writing into dir, installs it as the default and
 // redirects the standard log package to it.
 //
 // After this call anything written with log.Printf or log.Println goes through
 // the same file, rotation and cleanup.
-func Init(dir string, opts ...Option) (*Logger, error) {
+func InitDefault(dir string, opts ...Option) (*Logger, error) {
 	l, err := New(dir, opts...)
 	if err != nil {
 		return nil, err
